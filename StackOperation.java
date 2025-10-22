@@ -16,8 +16,8 @@ public class StackOperation {
         if(cheia()){
             System.out.println("A pilha tá cheia, não dá para colocar mais nada, it's over");
         }
-        vetor[topo] = valor;
         topo++;
+        vetor[topo] = valor;
         System.out.println("Valor inserido na pilha: " + valor);
 
     }
@@ -28,12 +28,12 @@ public class StackOperation {
         }
         int aux = vetor[topo];
         topo--;
-        System.out.println("Valor removido da pilha: " + aux);
         return aux;
     }
     public int TOPO(){
         if(vazia()){
             System.out.println("Tá vazia meu(minha) nobre, sem topo pra você");
+            return -1;
         }
         return vetor[topo];
     }
@@ -56,7 +56,6 @@ public class StackOperation {
         int a = pop();
         int b = pop();
         int resultado = b + a;
-        push(resultado);
         System.out.println("Resultado da soma: " + resultado);
     }
 
@@ -68,7 +67,6 @@ public class StackOperation {
         int a = pop();
         int b = pop();
         int resultado = b - a;
-        push(resultado);
         System.out.println("Resultado da subtração: " + resultado);
     }
 
@@ -80,7 +78,6 @@ public class StackOperation {
         int a = pop();
         int b = pop();
         int resultado = b * a;
-        push(resultado);
         System.out.println("Resultado da multiplicação: " + resultado);
     }
 
@@ -98,7 +95,6 @@ public class StackOperation {
             return;
         }
         int resultado = b / a;
-        push(resultado);
         System.out.println("Resultado da divisão: " + resultado);
     }
 
@@ -107,30 +103,42 @@ public class StackOperation {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        StackOperation p = new StackOperation(5);
-
         System.out.println("Digite o número de casos: ");
-
         int casos = sc.nextInt();
+        StackOperation p = new StackOperation(casos);
         sc.nextLine();
 
+
         for(int i = 0; i < casos; i++){
+            System.out.println("Digite o comando: ");
             String comando =  sc.next();
 
-            if(comando.equals("Empilhar")){
-                int x = sc.nextInt();
-                p.push(x);
-            } else if (comando.equals("Desempilhar")){
-                p.pop();
-            } else if (comando.equals("soma")){
-                p.soma();
-            } else if (comando.equals("subtrai")){
-                p.subtrai();
-            } else if (comando.equals("multiplica")){
-                p.multiplica();
-            } else if (comando.equals("divide")){}
-                p.multiplica();
+            switch (comando) {
+                case "empilha":
+                    int x = sc.nextInt();
+                    p.push(x);
+                    break;
+                case "desempilha":
+                    p.pop();
+                    break;
+                case "soma":
+                    p.soma();
+                    break;
+                case "subtrai":
+                    p.subtrai();
+                    break;
+                case "multiplica":
+                    p.multiplica();
+                    break;
+                case "divide":
+                    p.divide();
+                    break;
+                default:
+                    System.out.println("Comando inválido, tente de novo!");
+                    break;
+            }
         }
 
+        sc.close();
     }
 }
